@@ -1,38 +1,61 @@
 const ticTacToe = (function () {
     const gameBoard = {
-        positions: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        positions: [null, null, null, null, null, null, null, null, null],
 
         checkGame: function checkGameBoard() {
-            if ((this.positions[0] === this.positions[1]) && (this.positions[1] === this.positions[2]) ||
-                (this.positions[3] === this.positions[4]) && (this.positions[4] === this.positions[5]) ||
-                (this.positions[6] === this.positions[7]) && (this.positions[7] === this.positions[8]) ||
-                (this.positions[0] === this.positions[3]) && (this.positions[3] === this.positions[6]) ||
-                (this.positions[1] === this.positions[4]) && (this.positions[4] === this.positions[7]) ||
-                (this.positions[2] === this.positions[5]) && (this.positions[5] === this.positions[8]) ||
-                (this.positions[0] === this.positions[4]) && (this.positions[4] === this.positions[8]) ||
-                (this.positions[2] === this.positions[4]) && (this.positions[4] === this.positions[6])
+            if ((this.positions[0] === "X") && (this.positions[1] === "X") && (this.positions[2] === "X") ||
+                (this.positions[3] === "X") && (this.positions[4] === "X") && (this.positions[5] === "X") ||
+                (this.positions[6] === "X") && (this.positions[7] === "X") && (this.positions[8] === "X") ||
+                (this.positions[0] === "X") && (this.positions[3] === "X") && (this.positions[6] === "X") ||
+                (this.positions[1] === "X") && (this.positions[4] === "X") && (this.positions[7] === "X") ||
+                (this.positions[2] === "X") && (this.positions[5] === "X") && (this.positions[8] === "X") ||
+                (this.positions[0] === "X") && (this.positions[4] === "X") && (this.positions[8] === "X") ||
+                (this.positions[2] === "X") && (this.positions[4] === "X") && (this.positions[6] === "X")
             ) {
-                console.log("Game Over");
+                console.log("PlayerTwo Wins!");
+            } else if (
+                (this.positions[0] === "O") && (this.positions[1] === "O") && (this.positions[2] === "O") ||
+                (this.positions[3] === "O") && (this.positions[4] === "O") && (this.positions[5] === "O") ||
+                (this.positions[6] === "O") && (this.positions[7] === "O") && (this.positions[8] === "O") ||
+                (this.positions[0] === "O") && (this.positions[3] === "O") && (this.positions[6] === "O") ||
+                (this.positions[1] === "O") && (this.positions[4] === "O") && (this.positions[7] === "O") ||
+                (this.positions[2] === "O") && (this.positions[5] === "O") && (this.positions[8] === "O") ||
+                (this.positions[0] === "O") && (this.positions[4] === "O") && (this.positions[8] === "O") ||
+                (this.positions[2] === "O") && (this.positions[4] === "O") && (this.positions[6] === "O")
+            ) {
+                console.log("PlayerOne Wins!");
             }
         },
     }
+
+    // function declareWinner() {
+    //     console.log(`${player} wins!`);
+    // }
 
     const playerOne = {
             marker: "O",
 
             move: function move(num) {
-                gameBoard.positions[num] = this.marker;
-                gameBoard.checkGame();
-                },
+                if (gameBoard.positions[num] !== null) {
+                    console.log("This position is taken, try another");
+                } else {
+                    gameBoard.positions[num] = this.marker;
+                    gameBoard.checkGame();
+                }
+            },
         }
 
     const playerTwo = {
             marker: "X",
 
             move: function move(num) {
-                gameBoard.positions[num] = this.marker;
-                gameBoard.checkGame();
-                },
+                if (gameBoard.positions[num] !== null) {
+                    console.log("This position is taken, try another");
+                } else {
+                    gameBoard.positions[num] = this.marker;
+                    gameBoard.checkGame();
+                }
+            },
         }
 
             
