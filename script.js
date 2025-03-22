@@ -24,7 +24,10 @@ const ticTacToe = (function () {
                 (this.positions[2] === "O") && (this.positions[4] === "O") && (this.positions[6] === "O")
             ) {
                 console.log("PlayerOne Wins!");
+            } else if (!this.positions.includes(null)) {
+                console.log("Game Over. Players tied.")
             }
+
         },
     }
 
