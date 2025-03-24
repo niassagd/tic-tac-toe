@@ -27,40 +27,48 @@ const ticTacToe = (function () {
             } else if (!this.positions.includes(null)) {
                 console.log("Game Over. Players tied.")
             }
-
         },
     }
 
-    // function declareWinner() {
-    //     console.log(`${player} wins!`);
-    // }
+    //create players
 
-    const playerOne = {
-            marker: "O",
-
-            move: function move(num) {
-                if (gameBoard.positions[num] !== null) {
-                    console.log("This position is taken, try another");
-                } else {
-                    gameBoard.positions[num] = this.marker;
-                    gameBoard.checkGame();
-                }
-            },
+    function createPlayer (name, marker) {
+        return {
+            name: name,
+            marker: marker,
         }
+    }
 
-    const playerTwo = {
-            marker: "X",
+    const playerOne = createPlayer("Player One", "O");
+    const playerTwo = createPlayer("Player Two", "X");
 
-            move: function move(num) {
-                if (gameBoard.positions[num] !== null) {
-                    console.log("This position is taken, try another");
-                } else {
-                    gameBoard.positions[num] = this.marker;
-                    gameBoard.checkGame();
-                }
-            },
-        }
+    //alternate players turns
+    let currentPlayerTurn = playerOne;
+    let message = `Player One's turn.`;
 
+    const changePlayerTurn = function changeTurn () {
+            if (currentPlayerTurn === playerOne) {
+                currentPlayerTurn = playerTwo;
+            } else if (currentPlayerTurn === playerTwo) {
+                currentPlayerTurn = playerOne;
+            } message = `${currentPlayerTurn.name}'s turn.`;
+        }    
+
+    //player choose a position
+    function move(num) {
             
-        return {playerOne, playerTwo, gameBoard};
+        if (gameBoard.positions[num] !== null) {
+            console.log("This position is taken, try another");
+        } else {
+            gameBoard.positions[num] = currentPlayerTurn.marker;
+            console.log(gameBoard.positions);
+            gameBoard.checkGame();
+            changePlayerTurn();
+            console.log(message);
+        }
+    }
+
+    console.log(message);
+  
+        return {move};
 })();
