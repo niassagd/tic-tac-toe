@@ -1,33 +1,48 @@
 const ticTacToe = (function () {
     let gameStatus = "Game in progress...";
+    let movesPlayed = 0;
+    const boardPositions = [];
     const gameBoard = {
-        positions: [null, null, null, null, null, null, null, null, null],
+        createGameBoard: function() {
+            const rows = 3;
+            const cols = 3;
+                for (let i = 0; i < rows; i++) {
+                    boardPositions[i] = [];
+                    for (let j = 0; j < cols; j++) {
+                        boardPositions[i].push(j);
+                    }
+                }
+            },
 
+        //need to be able to check if the board is full for when no winner
+            
         checkGame: function checkGameBoard() {
-            if ((this.positions[0] === "X") && (this.positions[1] === "X") && (this.positions[2] === "X") ||
-                (this.positions[3] === "X") && (this.positions[4] === "X") && (this.positions[5] === "X") ||
-                (this.positions[6] === "X") && (this.positions[7] === "X") && (this.positions[8] === "X") ||
-                (this.positions[0] === "X") && (this.positions[3] === "X") && (this.positions[6] === "X") ||
-                (this.positions[1] === "X") && (this.positions[4] === "X") && (this.positions[7] === "X") ||
-                (this.positions[2] === "X") && (this.positions[5] === "X") && (this.positions[8] === "X") ||
-                (this.positions[0] === "X") && (this.positions[4] === "X") && (this.positions[8] === "X") ||
-                (this.positions[2] === "X") && (this.positions[4] === "X") && (this.positions[6] === "X")
+            if ((boardPositions[0][0] === "X") && (boardPositions[1][1] === "X") && (boardPositions[2][2] === "X") ||
+                (boardPositions[0][0] === "X") && (boardPositions[1][0] === "X") && (boardPositions[2][0] === "X") ||
+                (boardPositions[0][0] === "X") && (boardPositions[0][1] === "X") && (boardPositions[0][2] === "X") ||
+                (boardPositions[0][1] === "X") && (boardPositions[1][1] === "X") && (boardPositions[2][1] === "X") ||
+                (boardPositions[0][2] === "X") && (boardPositions[1][2] === "X") && (boardPositions[2][2] === "X") ||
+                (boardPositions[1][0] === "X") && (boardPositions[1][1] === "X") && (boardPositions[1][2] === "X") ||
+                (boardPositions[2][0] === "X") && (boardPositions[2][1] === "X") && (boardPositions[2][2] === "X") ||
+                (boardPositions[2][0] === "X") && (boardPositions[1][1] === "X") && (boardPositions[0][2] === "X")
             ) {
                 console.log("PlayerTwo Wins!");
                 gameStatus = "Good Game";
             } else if (
-                (this.positions[0] === "O") && (this.positions[1] === "O") && (this.positions[2] === "O") ||
-                (this.positions[3] === "O") && (this.positions[4] === "O") && (this.positions[5] === "O") ||
-                (this.positions[6] === "O") && (this.positions[7] === "O") && (this.positions[8] === "O") ||
-                (this.positions[0] === "O") && (this.positions[3] === "O") && (this.positions[6] === "O") ||
-                (this.positions[1] === "O") && (this.positions[4] === "O") && (this.positions[7] === "O") ||
-                (this.positions[2] === "O") && (this.positions[5] === "O") && (this.positions[8] === "O") ||
-                (this.positions[0] === "O") && (this.positions[4] === "O") && (this.positions[8] === "O") ||
-                (this.positions[2] === "O") && (this.positions[4] === "O") && (this.positions[6] === "O")
+                (boardPositions[0][0] === "O") && (boardPositions[1][1] === "O") && (boardPositions[2][2] === "O") ||
+                (boardPositions[0][0] === "O") && (boardPositions[1][0] === "O") && (boardPositions[2][0] === "O") ||
+                (boardPositions[0][0] === "O") && (boardPositions[0][1] === "O") && (boardPositions[0][2] === "O") ||
+                (boardPositions[0][1] === "O") && (boardPositions[1][1] === "O") && (boardPositions[2][1] === "O") ||
+                (boardPositions[0][2] === "O") && (boardPositions[1][2] === "O") && (boardPositions[2][2] === "O") ||
+                (boardPositions[1][0] === "O") && (boardPositions[1][1] === "O") && (boardPositions[1][2] === "O") ||
+                (boardPositions[2][0] === "O") && (boardPositions[2][1] === "O") && (boardPositions[2][2] === "O") ||
+                (boardPositions[2][0] === "O") && (boardPositions[1][1] === "O") && (boardPositions[0][2] === "O")
             ) {
                 console.log("PlayerOne Wins!");
                 gameStatus = "Good Game";
-            } else if (!this.positions.includes(null)) {
+
+                //need to check if all available spots are taken.
+            } else if (movesPlayed === 9) {
                 console.log("Game Over. Players tied.")
                 gameStatus = "Game Over";
             }
@@ -59,17 +74,28 @@ const ticTacToe = (function () {
             } playerTurnMessage = `${currentPlayerTurn.name}'s turn.`;
         }    
 
+    //check if position open
+
+    function isAvail(value) {
+        return typeof(value) === "number";
+    }
+
+    
+
     //player choose a position
-    function move(num) {
+    function move(col, row) {
         if (gameStatus === "Game Over") {
                 console.log(gameStatus);
-        } else if (gameBoard.positions[num] !== null) {
+        } else if (!isAvail(boardPositions[col][row])) {
             playerTurnMessage = "This position is taken, try another";
             console.log(playerTurnMessage);
         } else {
-            gameBoard.positions[num] = currentPlayerTurn.marker;
-            console.log(gameBoard.positions);
+            boardPositions[col][row] = currentPlayerTurn.marker;
+            console.log(boardPositions);
+            movesPlayed++;
+            console.log(movesPlayed);
             gameBoard.checkGame();
+            
             if (gameStatus === "Game Over" || gameStatus === "Good Game") {
                 console.log(gameStatus);
             } else {
@@ -80,7 +106,7 @@ const ticTacToe = (function () {
     }
 
     function restart() {
-        gameBoard.positions = [null, null, null, null, null, null, null, null, null];
+        gameBoard.createGameBoard();
         gameStatus = "New Game Started";
         console.log(gameStatus);
         console.log(playerTurnMessage);
@@ -115,6 +141,8 @@ const ticTacToe = (function () {
 
     console.log(gameStatus);
     console.log(playerTurnMessage);
+    gameBoard.createGameBoard();
+    console.log(boardPositions);
   
         return {move, restart};
 })();
