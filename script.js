@@ -64,8 +64,8 @@ const ticTacToe = (function () {
         if (gameStatus === "Game Over") {
                 console.log(gameStatus);
         } else if (gameBoard.positions[num] !== null) {
-            gameStatus = "This position is taken, try another";
-            console.log(gameStatus);
+            playerTurnMessage = "This position is taken, try another";
+            console.log(playerTurnMessage);
         } else {
             gameBoard.positions[num] = currentPlayerTurn.marker;
             console.log(gameBoard.positions);
@@ -86,28 +86,40 @@ const ticTacToe = (function () {
         console.log(playerTurnMessage);
     }
 
+    //game UI
+    const container = document.querySelector(".container");
+    const board = document.querySelector(".gameboard");
+
+    const gameStatusMessage = document.createElement("h1");
+    gameStatusMessage.textContent = gameStatus;
+    container.insertBefore(gameStatusMessage, board);
+
+    const playTurnMessage = document.createElement("h2");
+    playTurnMessage.textContent = playerTurnMessage;
+    container.insertBefore(playTurnMessage, board);
+
+    const table = document.createElement("table");
+        for (let i = 0; i < 3; i++) {
+            const row = document.createElement("tr");
+            table.appendChild(row);
+            for (let j = 0; j < 3; j++) {
+                const cell = document.createElement("td");
+                cell.classList.add("position");
+                row.appendChild(cell);
+            }
+        }
+
+    board.appendChild(table);
+
+    //console.log to start
+
+    console.log(gameStatus);
     console.log(playerTurnMessage);
   
         return {move, restart};
 })();
 
-// const container = document.querySelector(".container");
-// const turnMessage = document.createElement("h2");
-// container.appendChild(turnMessage);
 
-// const board = document.querySelector(".gameboard");
-// const table = document.createElement("table");
-//     for (let i = 0; i < 3; i++) {
-//         const row = document.createElement("tr");
-//         table.appendChild(row);
-//         for (let j = 0; j < 3; j++) {
-//             const cell = document.createElement("td");
-//             cell.classList.add("position");
-//             row.appendChild(cell);
-//         }
-//     }
-
-// board.appendChild(table);
 
 
 

@@ -41,8 +41,26 @@
   
   /* CSS Reset above */
 
+  h1, h2 {
+    text-align: center;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+  }
+
+  td{
+    outline: black solid 1px;
+  }
+
+  .gameStatus,
+  .gameMessage {
+    font-size: 3rem;
+  }
+
   .position {
-    width: 200px;
-    height: 200px;
-    background-color: rgb(216, 255, 242);
+    width: 100px;
+    height: 100px;
+    background-color: aliceblue;
   }
