@@ -2,6 +2,8 @@ const ticTacToe = (function () {
     const gameBoard = {
         positions: [null, null, null, null, null, null, null, null, null],
 
+        gameStatus: "In progress",
+
         checkGame: function checkGameBoard() {
             if ((this.positions[0] === "X") && (this.positions[1] === "X") && (this.positions[2] === "X") ||
                 (this.positions[3] === "X") && (this.positions[4] === "X") && (this.positions[5] === "X") ||
@@ -13,6 +15,7 @@ const ticTacToe = (function () {
                 (this.positions[2] === "X") && (this.positions[4] === "X") && (this.positions[6] === "X")
             ) {
                 console.log("PlayerTwo Wins!");
+                this.gameStatus = "over";
             } else if (
                 (this.positions[0] === "O") && (this.positions[1] === "O") && (this.positions[2] === "O") ||
                 (this.positions[3] === "O") && (this.positions[4] === "O") && (this.positions[5] === "O") ||
@@ -24,8 +27,10 @@ const ticTacToe = (function () {
                 (this.positions[2] === "O") && (this.positions[4] === "O") && (this.positions[6] === "O")
             ) {
                 console.log("PlayerOne Wins!");
+                this.gameStatus = "over";
             } else if (!this.positions.includes(null)) {
                 console.log("Game Over. Players tied.")
+                this.gameStatus = "over";
             }
         },
     }
@@ -56,15 +61,21 @@ const ticTacToe = (function () {
 
     //player choose a position
     function move(num) {
-            
-        if (gameBoard.positions[num] !== null) {
+        if (gameBoard.gameStatus === "over") {
+                console.log("Good Game.");
+        } else if (gameBoard.positions[num] !== null) {
             console.log("This position is taken, try another");
         } else {
             gameBoard.positions[num] = currentPlayerTurn.marker;
             console.log(gameBoard.positions);
             gameBoard.checkGame();
-            changePlayerTurn();
-            console.log(message);
+            if (gameBoard.gameStatus === "over") {
+                console.log("Good Game.");
+            } else {
+                changePlayerTurn();
+                console.log(message);
+            }
+            
         }
     }
 
