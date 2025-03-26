@@ -75,11 +75,17 @@ const ticTacToe = (function () {
                 changePlayerTurn();
                 console.log(message);
             }
-            
         }
+    }
+
+    function restart() {
+        gameBoard.positions = [null, null, null, null, null, null, null, null, null];
+        gameBoard.gameStatus = "In progress";
+        console.log("New Game Started");
+        console.log(message);
     }
 
     console.log(message);
   
-        return {move};
+        return {move, restart};
 })();
