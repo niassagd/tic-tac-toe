@@ -1,8 +1,7 @@
 const ticTacToe = (function () {
+    let gameStatus = "Game in progress...";
     const gameBoard = {
         positions: [null, null, null, null, null, null, null, null, null],
-
-        gameStatus: "In progress",
 
         checkGame: function checkGameBoard() {
             if ((this.positions[0] === "X") && (this.positions[1] === "X") && (this.positions[2] === "X") ||
@@ -15,7 +14,7 @@ const ticTacToe = (function () {
                 (this.positions[2] === "X") && (this.positions[4] === "X") && (this.positions[6] === "X")
             ) {
                 console.log("PlayerTwo Wins!");
-                this.gameStatus = "over";
+                gameStatus = "Good Game";
             } else if (
                 (this.positions[0] === "O") && (this.positions[1] === "O") && (this.positions[2] === "O") ||
                 (this.positions[3] === "O") && (this.positions[4] === "O") && (this.positions[5] === "O") ||
@@ -27,13 +26,14 @@ const ticTacToe = (function () {
                 (this.positions[2] === "O") && (this.positions[4] === "O") && (this.positions[6] === "O")
             ) {
                 console.log("PlayerOne Wins!");
-                this.gameStatus = "over";
+                gameStatus = "Good Game";
             } else if (!this.positions.includes(null)) {
                 console.log("Game Over. Players tied.")
-                this.gameStatus = "over";
+                gameStatus = "Game Over";
             }
         },
     }
+    //game status
 
     //create players
 
@@ -49,43 +49,66 @@ const ticTacToe = (function () {
 
     //alternate players turns
     let currentPlayerTurn = playerOne;
-    let message = `Player One's turn.`;
+    let playerTurnMessage = `Player One's turn.`;
 
     const changePlayerTurn = function changeTurn () {
             if (currentPlayerTurn === playerOne) {
                 currentPlayerTurn = playerTwo;
             } else if (currentPlayerTurn === playerTwo) {
                 currentPlayerTurn = playerOne;
-            } message = `${currentPlayerTurn.name}'s turn.`;
+            } playerTurnMessage = `${currentPlayerTurn.name}'s turn.`;
         }    
 
     //player choose a position
     function move(num) {
-        if (gameBoard.gameStatus === "over") {
-                console.log("Good Game.");
+        if (gameStatus === "Game Over") {
+                console.log(gameStatus);
         } else if (gameBoard.positions[num] !== null) {
-            console.log("This position is taken, try another");
+            gameStatus = "This position is taken, try another";
+            console.log(gameStatus);
         } else {
             gameBoard.positions[num] = currentPlayerTurn.marker;
             console.log(gameBoard.positions);
             gameBoard.checkGame();
-            if (gameBoard.gameStatus === "over") {
-                console.log("Good Game.");
+            if (gameStatus === "Game Over" || gameStatus === "Good Game") {
+                console.log(gameStatus);
             } else {
                 changePlayerTurn();
-                console.log(message);
+                console.log(playerTurnMessage);
             }
         }
     }
 
     function restart() {
         gameBoard.positions = [null, null, null, null, null, null, null, null, null];
-        gameBoard.gameStatus = "In progress";
-        console.log("New Game Started");
-        console.log(message);
+        gameStatus = "New Game Started";
+        console.log(gameStatus);
+        console.log(playerTurnMessage);
     }
 
-    console.log(message);
+    console.log(playerTurnMessage);
   
         return {move, restart};
 })();
+
+// const container = document.querySelector(".container");
+// const turnMessage = document.createElement("h2");
+// container.appendChild(turnMessage);
+
+// const board = document.querySelector(".gameboard");
+// const table = document.createElement("table");
+//     for (let i = 0; i < 3; i++) {
+//         const row = document.createElement("tr");
+//         table.appendChild(row);
+//         for (let j = 0; j < 3; j++) {
+//             const cell = document.createElement("td");
+//             cell.classList.add("position");
+//             row.appendChild(cell);
+//         }
+//     }
+
+// board.appendChild(table);
+
+
+
+

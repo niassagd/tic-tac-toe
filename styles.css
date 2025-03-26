@@ -40,3 +40,9 @@
   }
   
   /* CSS Reset above */
+
+  .position {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(216, 255, 242);
+  }
