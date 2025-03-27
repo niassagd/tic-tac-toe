@@ -80,8 +80,6 @@ const ticTacToe = (function () {
         return typeof(value) === "number";
     }
 
-    
-
     //player choose a position
     function move(col, row) {
         if (gameStatus === "Game Over") {
@@ -112,30 +110,7 @@ const ticTacToe = (function () {
         console.log(playerTurnMessage);
     }
 
-    //game UI
-    const container = document.querySelector(".container");
-    const board = document.querySelector(".gameboard");
-
-    const gameStatusMessage = document.createElement("h1");
-    gameStatusMessage.textContent = gameStatus;
-    container.insertBefore(gameStatusMessage, board);
-
-    const playTurnMessage = document.createElement("h2");
-    playTurnMessage.textContent = playerTurnMessage;
-    container.insertBefore(playTurnMessage, board);
-
-    const table = document.createElement("table");
-        for (let i = 0; i < 3; i++) {
-            const row = document.createElement("tr");
-            table.appendChild(row);
-            for (let j = 0; j < 3; j++) {
-                const cell = document.createElement("td");
-                cell.classList.add("position");
-                row.appendChild(cell);
-            }
-        }
-
-    board.appendChild(table);
+    
 
     //console.log to start
 
@@ -143,6 +118,36 @@ const ticTacToe = (function () {
     console.log(playerTurnMessage);
     gameBoard.createGameBoard();
     console.log(boardPositions);
+
+
+
+        //game UI
+        const container = document.querySelector(".container");
+        const board = document.querySelector(".gameboard");
+    
+        const gameStatusMessage = document.createElement("h1");
+        gameStatusMessage.textContent = gameStatus;
+        container.insertBefore(gameStatusMessage, board);
+    
+        const playTurnMessage = document.createElement("h2");
+        playTurnMessage.textContent = playerTurnMessage;
+        container.insertBefore(playTurnMessage, board);
+    
+        const table = document.createElement("table");
+            for (let i = 0; i < 3; i++) {
+                const row = document.createElement("tr");
+                table.appendChild(row);
+                for (let j = 0; j < 3; j++) {
+                    const cell = document.createElement("td");
+                    const innerArray = boardPositions[i];
+                    cell.textContent = innerArray[j];
+                    cell.classList.add("empty");
+                    cell.classList.add("position");
+                    row.appendChild(cell);
+                }
+            }
+
+        board.appendChild(table);
   
         return {move, restart};
 })();

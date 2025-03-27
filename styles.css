@@ -52,6 +52,16 @@
 
   td{
     outline: black solid 1px;
+    text-align: center;
+    font-size: 4rem;
+  }
+
+  .empty {
+    color: transparent;
+  }
+
+  .positionTaken {
+    color: black;
   }
 
   .gameStatus,
