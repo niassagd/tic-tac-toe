@@ -143,6 +143,12 @@ const ticTacToe = (function () {
                     cell.textContent = innerArray[j];
                     cell.classList.add("empty");
                     cell.classList.add("position");
+
+                    cell.addEventListener("click", () => {
+                        move(i,j);
+                        cell.classList.remove("empty");
+                        cell.textContent = innerArray[j];
+                    })
                     row.appendChild(cell);
                 }
             }
