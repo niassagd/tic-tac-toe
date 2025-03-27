@@ -120,7 +120,9 @@ const ticTacToe = (function () {
     console.log(boardPositions);
 
 
+    //update Button for UI to update 
 
+    
         //game UI
         const container = document.querySelector(".container");
         const board = document.querySelector(".gameboard");
@@ -152,6 +154,16 @@ const ticTacToe = (function () {
                     row.appendChild(cell);
                 }
             }
+
+        //UI restart button 
+
+        const restartBtn = document.createElement("button");
+        restartBtn.classList.add("restartBtn");
+        restartBtn.textContent = "Start New Game";
+        restartBtn.addEventListener("click", () => {
+            restart();
+        })
+        container.appendChild(restartBtn);
 
         board.appendChild(table);
   

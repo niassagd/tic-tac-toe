@@ -50,6 +50,13 @@
     justify-content: center;
   }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+  }
+
   td{
     outline: black solid 1px;
     text-align: center;
@@ -69,8 +76,24 @@
     font-size: 3rem;
   }
 
+  .gameboard {
+    margin: 30px;
+  }
+
   .position {
-    width: 100px;
-    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
     background-color: aliceblue;
+  }
+
+  .restartBtn {
+    color: aliceblue;
+    text-align: center;
+    height: 35px;
+    width: 170px;
+    background-color: rgb(28, 142, 255);
+    border-radius: 20px;
+    outline: transparent;
+    border: none;
+  
   }
