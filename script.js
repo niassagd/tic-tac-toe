@@ -69,12 +69,9 @@ const ticTacToe = (function () {
     let currentPlayerTurn = playerOne;
     let playerTurnMessage = `Player One's turn.`;
 
-    const changePlayerTurn = function changeTurn () {
-            if (currentPlayerTurn === playerOne) {
-                currentPlayerTurn = playerTwo;
-            } else if (currentPlayerTurn === playerTwo) {
-                currentPlayerTurn = playerOne;
-            } playerTurnMessage = `${currentPlayerTurn.name}'s turn.`;
+    const changePlayerTurn = () => {
+            currentPlayerTurn === playerOne ? currentPlayerTurn = playerTwo : currentPlayerTurn = playerOne;
+            playerTurnMessage = `${currentPlayerTurn.name}'s turn.`;
         }    
 
     //check if position open
@@ -124,7 +121,7 @@ const ticTacToe = (function () {
     console.log(boardPositions);
 
 
-        //game UI
+        //UI
         const container = document.querySelector(".container");
         const board = document.querySelector(".gameboard");
     
@@ -136,6 +133,8 @@ const ticTacToe = (function () {
         playTurnMessage.textContent = playerTurnMessage;
         container.insertBefore(playTurnMessage, board);
     
+
+        //create gameboard UI
         function renderBoard() {
             const existingTable = document.querySelector("table");
             if (existingTable) {
@@ -162,10 +161,6 @@ const ticTacToe = (function () {
                 }
                 board.appendChild(table);
             }
-        
-        
-
-        
 
     //updateScreen Button for UI to updateScreen 
             function updateScreen () {
