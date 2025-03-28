@@ -16,31 +16,18 @@ const ticTacToe = (function () {
 
         //need to be able to check if the board is full for when no winner
             
-        checkGame: function checkGameBoard() {
-            if ((boardPositions[0][0] === "X") && (boardPositions[1][1] === "X") && (boardPositions[2][2] === "X") ||
-                (boardPositions[0][0] === "X") && (boardPositions[1][0] === "X") && (boardPositions[2][0] === "X") ||
-                (boardPositions[0][0] === "X") && (boardPositions[0][1] === "X") && (boardPositions[0][2] === "X") ||
-                (boardPositions[0][1] === "X") && (boardPositions[1][1] === "X") && (boardPositions[2][1] === "X") ||
-                (boardPositions[0][2] === "X") && (boardPositions[1][2] === "X") && (boardPositions[2][2] === "X") ||
-                (boardPositions[1][0] === "X") && (boardPositions[1][1] === "X") && (boardPositions[1][2] === "X") ||
-                (boardPositions[2][0] === "X") && (boardPositions[2][1] === "X") && (boardPositions[2][2] === "X") ||
-                (boardPositions[2][0] === "X") && (boardPositions[1][1] === "X") && (boardPositions[0][2] === "X")
+        checkGame: function checkGameBoard(marker) {
+            if ((boardPositions[0][0] === currentPlayerTurn.marker) && (boardPositions[1][1] === currentPlayerTurn.marker) && (boardPositions[2][2] === currentPlayerTurn.marker) ||
+                (boardPositions[0][0] === currentPlayerTurn.marker) && (boardPositions[1][0] === currentPlayerTurn.marker) && (boardPositions[2][0] === currentPlayerTurn.marker) ||
+                (boardPositions[0][0] === currentPlayerTurn.marker) && (boardPositions[0][1] === currentPlayerTurn.marker) && (boardPositions[0][2] === currentPlayerTurn.marker) ||
+                (boardPositions[0][1] === currentPlayerTurn.marker) && (boardPositions[1][1] === currentPlayerTurn.marker) && (boardPositions[2][1] === currentPlayerTurn.marker) ||
+                (boardPositions[0][2] === currentPlayerTurn.marker) && (boardPositions[1][2] === currentPlayerTurn.marker) && (boardPositions[2][2] === currentPlayerTurn.marker) ||
+                (boardPositions[1][0] === currentPlayerTurn.marker) && (boardPositions[1][1] === currentPlayerTurn.marker) && (boardPositions[1][2] === currentPlayerTurn.marker) ||
+                (boardPositions[2][0] === currentPlayerTurn.marker) && (boardPositions[2][1] === currentPlayerTurn.marker) && (boardPositions[2][2] === currentPlayerTurn.marker) ||
+                (boardPositions[2][0] === currentPlayerTurn.marker) && (boardPositions[1][1] === currentPlayerTurn.marker) && (boardPositions[0][2] === currentPlayerTurn.marker)
             ) {
-                console.log("PlayerTwo Wins!");
-                playerTurnMessage = "Player Two Wins!";
-                gameStatus = "Good Game";
-            } else if (
-                (boardPositions[0][0] === "O") && (boardPositions[1][1] === "O") && (boardPositions[2][2] === "O") ||
-                (boardPositions[0][0] === "O") && (boardPositions[1][0] === "O") && (boardPositions[2][0] === "O") ||
-                (boardPositions[0][0] === "O") && (boardPositions[0][1] === "O") && (boardPositions[0][2] === "O") ||
-                (boardPositions[0][1] === "O") && (boardPositions[1][1] === "O") && (boardPositions[2][1] === "O") ||
-                (boardPositions[0][2] === "O") && (boardPositions[1][2] === "O") && (boardPositions[2][2] === "O") ||
-                (boardPositions[1][0] === "O") && (boardPositions[1][1] === "O") && (boardPositions[1][2] === "O") ||
-                (boardPositions[2][0] === "O") && (boardPositions[2][1] === "O") && (boardPositions[2][2] === "O") ||
-                (boardPositions[2][0] === "O") && (boardPositions[1][1] === "O") && (boardPositions[0][2] === "O")
-            ) {
-                console.log("PlayerOne Wins!");
-                playerTurnMessage ="Player One Wins!";
+                console.log(`${currentPlayerTurn.name} Wins!`);
+                playerTurnMessage = `${currentPlayerTurn.name} Wins!`;
                 gameStatus = "Good Game";
 
                 //need to check if all available spots are taken.
@@ -92,7 +79,7 @@ const ticTacToe = (function () {
             console.log(boardPositions);
             movesPlayed++;
             console.log(movesPlayed);
-            gameBoard.checkGame();
+            gameBoard.checkGame(currentPlayerTurn.marker);
             
             if (gameStatus === "Game Over" || gameStatus === "Good Game") {
                 console.log(gameStatus);
