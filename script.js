@@ -14,8 +14,7 @@ const ticTacToe = (function () {
                 }
             },
 
-        //need to be able to check if the board is full for when no winner
-            
+        //need to be able to check if the board is full for when no winner         
         checkGame: function checkGameBoard(marker) {
             if ((boardPositions[0][0] === currentPlayerTurn.marker) && (boardPositions[1][1] === currentPlayerTurn.marker) && (boardPositions[2][2] === currentPlayerTurn.marker) ||
                 (boardPositions[0][0] === currentPlayerTurn.marker) && (boardPositions[1][0] === currentPlayerTurn.marker) && (boardPositions[2][0] === currentPlayerTurn.marker) ||
@@ -38,10 +37,8 @@ const ticTacToe = (function () {
             }
         },
     }
-    //game status
 
     //create players
-
     function createPlayer (name, marker) {
         return {
             name: name,
@@ -171,11 +168,32 @@ const ticTacToe = (function () {
         container.appendChild(restartBtn);
         renderBoard();
   
-        return {move, restart};
+        
 })();
 
 
+//darkmode toggle 
 
+const input = document.querySelector("input[type=checkbox]");
+
+input.addEventListener("change", (event) => {
+    const body = document.querySelector("body");
+    const cells = document.getElementsByClassName("position");
+    const button = document.querySelector("button");
+    if (event.target.checked) {
+        body.classList.add("darkMode");
+        for (let cell of cells) {
+            cell.classList.add("darkMode");
+        }
+        button.classList.add("darkMode");
+    } else {
+        body.classList.remove("darkMode");
+        for (let cell of cells) {
+            cell.classList.remove("darkMode");
+        }
+        button.classList.remove("darkMode");
+    }
+})
 
 
 
