@@ -61,6 +61,8 @@
     outline: black solid 1px;
     text-align: center;
     font-size: 4rem;
+    min-width: 100px;
+    height: 100px;
   }
 
   .empty {
@@ -81,8 +83,7 @@
   }
 
   .position {
-    min-width: 100px;
-    min-height: 100px;
+
     background-color: aliceblue;
   }
 
