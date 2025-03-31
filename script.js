@@ -1,3 +1,5 @@
+
+
 const ticTacToe = (function () {
     let gameStatus = "Game in progress...";
     let movesPlayed = 0;
@@ -51,7 +53,7 @@ const ticTacToe = (function () {
 
     //alternate players turns
     let currentPlayerTurn = playerOne;
-    let playerTurnMessage = `Player One's turn.`;
+    let playerTurnMessage = `${playerOne.name}'s turn.`;
 
     const changePlayerTurn = () => {
             currentPlayerTurn === playerOne ? currentPlayerTurn = playerTwo : currentPlayerTurn = playerOne;
@@ -195,5 +197,10 @@ input.addEventListener("change", (event) => {
     }
 })
 
+//
+const form = document.querySelector("form");
+form.addEventListener("submit", function(event) {
+    form.remove();
+})
 
 

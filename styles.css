@@ -53,6 +53,48 @@
     justify-content: center;
     
   }
+  .closeBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border-radius: 50%;
+    background-color: #00000036;
+    border: transparent;
+    color: white;
+  }
+  .closeBtn::before {
+    content: "Close";
+    position: absolute;
+    right: 27px;
+    color: #00000036;
+  }
+  .closeBtn:hover {
+  background-color: black;
+  }
+  .closeBtn:hover::before {
+    color: black;
+  }
+
+  .names {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background-color: aliceblue;
+    box-shadow: #ccc 10px 10px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .names input[type="text"] {
+    width: 100%;
+  }
+
+  #hidden {
+    visibility: hidden;
+  }
 
   .container {
     display: flex;
@@ -92,6 +134,7 @@
     background-color: aliceblue;
   }
 
+  input[type="submit"],
   .restartBtn {
     color: aliceblue;
     text-align: center;
@@ -103,7 +146,7 @@
     border: none;
     cursor: pointer;
   }
-
+  input[type="submit"],
   .restartBtn:hover {
     font-weight: bold;
   }
