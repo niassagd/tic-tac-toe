@@ -51,6 +51,7 @@ const ticTacToe = (function () {
     const playerOne = createPlayer("Player One", "O");
     const playerTwo = createPlayer("Player Two", "X");
 
+ 
     //alternate players turns
     let currentPlayerTurn = playerOne;
     let playerTurnMessage = `${playerOne.name}'s turn.`;
@@ -106,47 +107,131 @@ const ticTacToe = (function () {
     gameBoard.createGameBoard();
     console.log(boardPositions);
 
+               //form to retrieve player names 
 
-        //UI
-        const container = document.querySelector(".container");
-        const board = document.querySelector(".gameboard");
+    // <form class="names">
+            
+    // <h1>Let's Play Tic Tac Toe!</h1>
+    // <h2>Please enter your names</h2>
     
-        const gameStatusMessage = document.createElement("h1");
-        gameStatusMessage.textContent = gameStatus;
-        container.insertBefore(gameStatusMessage, board);
-    
-        const playTurnMessage = document.createElement("h2");
-        playTurnMessage.textContent = playerTurnMessage;
-        container.insertBefore(playTurnMessage, board);
-    
+    // <label for="name1">Player 1 Name:
+    // <input type="text" id="name1" name="name1" required/></label>
+    // <label for="name2">Player 2 Name:
+    // <input type="text" id="name2" name="name2"required/></label>
+    // <input name="enterNames" type="submit"/>
 
-        //create gameboard UI
-        function renderBoard() {
-            const existingTable = document.querySelector("table");
-            if (existingTable) {
-                existingTable.remove();
-            }
-            //create table UI
-            const table = document.createElement("table");
-                for (let i = 0; i < 3; i++) {
-                    const row = document.createElement("tr");
-                    table.appendChild(row);
-                    for (let j = 0; j < 3; j++) {
-                        const cell = document.createElement("td");
-                        const innerArray = boardPositions[i];
-                        cell.classList.add("empty");
-                        cell.classList.add("position");
+    // </form>
+    const container = document.querySelector(".container");
 
-                        cell.addEventListener("click", () => {
-                            move(i,j);
-                            cell.classList.remove("empty");
-                            cell.textContent = innerArray[j];
-                        })
-                        row.appendChild(cell);
-                    }
-                }
-                board.appendChild(table);
-            }
+    const form = document.createElement("form");
+    form.classList.add("names");
+    container.appendChild(form);
+
+    const welcome = document.createElement("h1");
+    welcome.textContent = "Let's Play Tic Tac Toe!";
+    form.appendChild(welcome);
+    
+    const prompt = document.createElement("h3");
+    prompt.textContent = "Please enter your names.";
+    form.appendChild(prompt);
+
+    const player1Label = document.createElement("label");
+    player1Label.for = "name1";
+    player1Label.textContent = "Player 1 Name:";
+    form.appendChild(player1Label);
+
+    const player1Name = document.createElement("input");
+    player1Name.required = true;
+    player1Name.type = "text";
+    player1Name.id = "name1";
+    player1Name.name = "name1";
+    player1Label.appendChild(player1Name);
+
+    const player2Label = document.createElement("label");
+    
+    player2Label.for = "name2";
+    player2Label.textContent = "Player 2 Name:";
+    form.appendChild(player2Label);
+
+    const player2Name = document.createElement("input");
+    player2Name.required = true;
+    player2Name.type = "text";
+    player2Name.id = "name2";
+    player2Name.name = "name2";
+    player2Label.appendChild(player2Name);
+
+    const submit = document.createElement("input");
+    submit.type = "submit";
+    submit.name = "submitNames";
+    form.appendChild(submit);
+
+    //end of form
+
+    const nameOfPlayer1 = document.getElementById("name1");
+    const nameOfPlayer2 = document.getElementById("name2");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        playerOne.name = nameOfPlayer1.value;
+        playerTwo.name = nameOfPlayer2.value;
+        playerTurnMessage = `${playerOne.name}'s turn.`;
+        updateScreen();
+        form.remove();
+    })
+
+    //
+
+     //gameboard UI
+     
+     const board = document.querySelector(".gameboard");
+ 
+     const gameStatusMessage = document.createElement("h1");
+     gameStatusMessage.textContent = gameStatus;
+     container.insertBefore(gameStatusMessage, board);
+ 
+     const playTurnMessage = document.createElement("h2");
+     playTurnMessage.textContent = playerTurnMessage;
+     container.insertBefore(playTurnMessage, board);
+ 
+
+     //create gameboard UI
+     function renderBoard() {
+         const existingTable = document.querySelector("table");
+         if (existingTable) {
+             existingTable.remove();
+         }
+         //create table UI
+         const table = document.createElement("table");
+             for (let i = 0; i < 3; i++) {
+                 const row = document.createElement("tr");
+                 table.appendChild(row);
+                 for (let j = 0; j < 3; j++) {
+                     const cell = document.createElement("td");
+                     const innerArray = boardPositions[i];
+                     cell.classList.add("empty");
+                     cell.classList.add("position");
+
+                     cell.addEventListener("click", () => {
+                         move(i,j);
+                         cell.classList.remove("empty");
+                         cell.textContent = innerArray[j];
+                     })
+                     row.appendChild(cell);
+                 }
+             }
+             board.appendChild(table);
+         }
+
+    const closeBtn = document.createElement("button");
+    closeBtn.classList.add("closeBtn");
+    closeBtn.textContent = "X";
+    form.appendChild(closeBtn);
+
+    closeBtn.addEventListener("click", () => {
+        form.remove();
+    })
+
+
 
     //updateScreen Button for UI to updateScreen 
             function updateScreen () {
@@ -198,9 +283,3 @@ input.addEventListener("change", (event) => {
 })
 
 //
-const form = document.querySelector("form");
-form.addEventListener("submit", function(event) {
-    form.remove();
-})
-
-
